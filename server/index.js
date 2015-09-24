@@ -15,28 +15,28 @@ var url = require('url')
 
 var config = require('../config')
 
-var CORS_WHITELIST = [
+/*var CORS_WHITELIST = [
   'http://instant-io.herokuapp.com',
   'https://instant-io.herokuapp.com',
   'http://instant.rom1504.fr',
   'http://whiteboard.webtorrent.io',
   'http://file.pizza',
   'https://file.pizza'
-]
+]*/
 
-var secret, secretKey, secretCert
+/*var secret, secretKey, secretCert
 try {
   secret = require('../secret')
   secretKey = fs.readFileSync(path.join(__dirname, '../secret/instant.io.key'))
   secretCert = fs.readFileSync(path.join(__dirname, '../secret/instant.io.chained.crt'))
 } catch (err) {}
-
+*/
 var app = express()
 var httpServer = http.createServer(app)
 var httpsServer
-if (secretKey && secretCert) {
-  httpsServer = https.createServer({ key: secretKey, cert: secretCert }, app)
-}
+//if (secretKey && secretCert) {
+//  httpsServer = https.createServer({ key: secretKey, cert: secretCert }, app)
+//}
 
 unlimited()
 
@@ -97,7 +97,7 @@ app.get('/', function (req, res) {
 })
 
 // Fetch new ice_servers from twilio token regularly
-var iceServers
+/*var iceServers
 var twilioClient
 try {
   twilioClient = twilio(secret.twilio.accountSid, secret.twilio.authToken)
@@ -129,7 +129,7 @@ if (twilioClient) {
   setInterval(updateIceServers, 60 * 60 * 4 * 1000).unref()
   updateIceServers()
 }
-
+*/
 app.get('/rtcConfig', cors({
   origin: function (origin, cb) {
     var allowed = CORS_WHITELIST.indexOf(origin) >= 0 ||
